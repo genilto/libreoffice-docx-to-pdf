@@ -16,13 +16,19 @@ npm start
 
 Or you can run in docker. The image exists in docker hub.
 ```
-docker run --rm -d genilto/libreoffice-docx-to-pdf
+docker run -d -p 3000:3000 --name docx-pdf genilto/libreoffice-docx-to-pdf
 ```
 
 Or You can build the image yourself before run:
 ```
 docker build . --tag genilto/libreoffice-docx-to-pdf
 ```
+
+## Attach a shell to the container
+```
+docker exec -u root -it docx-pdf bash
+```
+
 # Next Steps
 ```
 [X] Run everything in docker
@@ -32,5 +38,6 @@ docker build . --tag genilto/libreoffice-docx-to-pdf
 [ ] Include an endpoint to install custom fonts? Maybe not
 [ ] Include an api that receive a base64 docx and return a pdf document
 [ ] Include an api that receive an url to a docx document and return a pdf document
-[ ] Include an api that receive an url to a docx document and an webhook url and calls the webhook with the pdf document in body
+[ ] Include an api that receive an url to a docx document and an webhook url, make pdf and calls the webhook with the pdf document in body
+[ ] Include an api that receive an google cloud storage docx file path and an webhook url, make pdf, upload back to cloud storage, and calls the webhook informing the process is done
 ```
