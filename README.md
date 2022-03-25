@@ -2,7 +2,7 @@
 Web API to convert docx document to PDF using libreoffice
 
 # Requirements
-You need to have libreoffice installed on your system
+You need to have libreoffice installed on your system.
 
 Good news! 
 You can run the application in docker, with all dependencies installed, including libreoffice. See more bellow!
@@ -19,7 +19,7 @@ Or you can run in docker. The image exists in docker hub.
 docker run -d -p 3000:3000 --name docx-pdf genilto/libreoffice-docx-to-pdf
 ```
 
-Or You can build the image yourself before run:
+Or You can build the image yourself:
 ```
 docker build . --tag genilto/libreoffice-docx-to-pdf
 ```
@@ -28,6 +28,11 @@ docker build . --tag genilto/libreoffice-docx-to-pdf
 ```
 docker exec -u root -it docx-pdf bash
 ```
+
+# How to test?
+Just access in your browser http://localhost:3000 and you will see the pdf generated from the docx that is inside src/resources/doc.docx
+
+Works very well as a POC, but it really needs that the Next Steps to be implemented!
 
 # Next Steps
 ```
