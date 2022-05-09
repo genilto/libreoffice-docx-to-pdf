@@ -1,0 +1,44 @@
+docker build . --tag us.gcr.io/firebase-next-step/libreoffice-docx-to-pdf
+docker run -d -p 3000:3000 --name docx-pdf us.gcr.io/firebase-next-step/libreoffice-docx-to-pdf
+docker push us.gcr.io/firebase-next-step/libreoffice-docx-to-pdf
+docker exec -it -u root docx-pdf sh
+
+
+
+-- MACRO 1
+sub Refresh
+rem UpdateAllIndexes hint from http://www.oooforum.org/forum/viewtopic.phtml?t=41113
+dim document   as object
+dim dispatcher as object
+document   = ThisComponent.CurrentController.Frame
+dispatcher = createUnoService("com.sun.star.frame.DispatchHelper")
+dispatcher.executeDispatch(document, ".uno:UpdateAllIndexes", "", 0, Array())
+end sub
+
+-- MACRO 2
+rem http://www.oooforum.org/forum/viewtopic.phtml?t=11826
+sub updater
+oIndexes = ThisComponent.getDocumentIndexes()
+
+for i = 0 to oIndexes.getCount() - 1
+oIndexes (i).update
+msgBox ("Index updated: " + oIndexes.getByIndex (i).getServiceName ())
+next i
+
+end sub
+
+-- MACRO 3
+sub updateIndex
+
+if ((ThisComponent.supportsService("com.sun.star.text.TextDocument")) OR (ThisComponent.supportsService("com.sun.star.text.WebDocument"))) Then
+   oIndexes = ThisComponent.getDocumentIndexes()
+   
+   for i = 0 to oIndexes.getCount() - 1
+   oIndexes (i).update
+   REM If you want to get a message box when the index is updated
+   REM remove the "REM" in front of the msgBox line below!!
+   REM msgBox ("Index updated: " + oIndexes.getByIndex (i).getServiceName ())
+   next i
+end if
+
+end sub
