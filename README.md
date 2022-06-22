@@ -26,7 +26,7 @@ docker build . --tag genilto/libreoffice-docx-to-pdf
 
 ## Attach a shell to the container
 ```
-docker exec -u root -it docx-pdf bash
+docker exec -u root -it docx-pdf sh
 ```
 
 # How to test?

@@ -1,4 +1,4 @@
-FROM node:17-alpine
+FROM node:18-alpine
 
 # Install libreoffice
 RUN apk add --no-cache --progress --quiet libreoffice-writer \
